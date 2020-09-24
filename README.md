@@ -1,2 +1,2 @@
-# IntercopTest
+# IntercorpTest
 Challenge
