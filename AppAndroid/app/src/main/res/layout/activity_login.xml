@@ -1,0 +1,246 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/container"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/colorPrimary"
+    tools:context=".features.auth.login.LoginActivity">
+
+    <TextView
+        android:id="@+id/txt_page_title"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/login_title_intercorp_test"
+        android:textColor="@android:color/white"
+        android:textSize="@dimen/dimension_title_page"
+        app:layout_constraintBottom_toTopOf="@+id/guideline_title"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
+
+    <TextView
+        android:id="@+id/txt_login_title"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/login_title_log_in"
+        android:textSize="@dimen/dimension_title_component"
+        android:textColor="@android:color/white"
+        android:textStyle="bold"
+        android:layout_marginTop="@dimen/_20sdp"
+        app:layout_constraintStart_toStartOf="@+id/guideline_left_padding"
+        app:layout_constraintTop_toTopOf="@+id/guideline_title" />
+
+    <View
+        android:id="@+id/view_line_login_title"
+        android:layout_width="0dp"
+        android:layout_height="@dimen/_1sdp"
+        android:layout_marginEnd="@dimen/_20sdp"
+        android:background="@android:color/white"
+        android:layout_marginTop="@dimen/_5sdp"
+        app:layout_constraintEnd_toEndOf="@+id/txt_login_title"
+        app:layout_constraintStart_toStartOf="@+id/guideline_left_padding"
+        app:layout_constraintTop_toBottomOf="@+id/txt_login_title" />
+
+    <TextView
+        android:id="@+id/txt_mobile_number"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/_40sdp"
+        android:text="@string/login_mobile_number"
+        android:textColor="@android:color/white"
+        android:textSize="@dimen/_10ssp"
+        android:textStyle="bold"
+        app:layout_constraintStart_toEndOf="@+id/img_phone_icon"
+        app:layout_constraintTop_toBottomOf="@+id/txt_login_title" />
+
+    <ImageView
+        android:id="@+id/img_phone_icon"
+        android:layout_width="@dimen/_20sdp"
+        android:layout_height="@dimen/_20sdp"
+        android:layout_marginStart="@dimen/_10sdp"
+        android:layout_marginTop="@dimen/_10sdp"
+        app:layout_constraintStart_toStartOf="@+id/guideline_left_padding"
+        app:layout_constraintTop_toBottomOf="@+id/txt_mobile_number"
+        app:srcCompat="@drawable/ic_person_outline_black_24dp"
+        tools:ignore="ContentDescription" />
+
+    <EditText
+        android:id="@+id/edit_phone_area_code"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/_10sdp"
+        android:inputType="phone"
+        android:maxLines="1"
+        android:singleLine="true"
+        android:background="@android:color/transparent"
+        android:textColor="@android:color/white"
+        android:hint="+54"
+        app:layout_constraintBottom_toBottomOf="@+id/img_phone_icon"
+        app:layout_constraintStart_toEndOf="@+id/img_phone_icon"
+        app:layout_constraintTop_toTopOf="@+id/img_phone_icon"
+        android:importantForAutofill="no"
+        tools:ignore="LabelFor" />
+
+    <View
+        android:id="@+id/divider_phone"
+        android:layout_width="1dp"
+        android:layout_height="0dp"
+        android:layout_marginStart="@dimen/_10sdp"
+        android:background="@android:color/white"
+        app:layout_constraintBottom_toBottomOf="@+id/edit_phone_area_code"
+        app:layout_constraintStart_toEndOf="@+id/edit_phone_area_code"
+        app:layout_constraintTop_toTopOf="@+id/edit_phone_area_code" />
+
+    <EditText
+        android:id="@+id/edit_phone_number"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/_10sdp"
+        android:layout_marginEnd="@dimen/_20sdp"
+        android:inputType="phone"
+        android:maxLines="1"
+        android:singleLine="true"
+        android:background="@android:color/transparent"
+        android:textColor="@android:color/white"
+        android:hint="12456789"
+        app:layout_constraintBottom_toBottomOf="@+id/divider_phone"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/divider_phone"
+        app:layout_constraintTop_toTopOf="@+id/divider_phone"
+        android:importantForAutofill="no"
+        tools:ignore="LabelFor" />
+
+    <View
+        android:id="@+id/view_line_bottom_phone"
+        android:layout_width="0dp"
+        android:layout_height="@dimen/_1sdp"
+        android:layout_marginTop="@dimen/_10sdp"
+        android:background="@android:color/white"
+        app:layout_constraintEnd_toEndOf="@+id/edit_phone_number"
+        app:layout_constraintStart_toStartOf="@+id/edit_phone_area_code"
+        app:layout_constraintTop_toBottomOf="@+id/edit_phone_number" />
+
+    <com.github.ybq.android.spinkit.SpinKitView
+        android:id="@+id/spinner_loader"
+        style="@style/SpinKitView.Small.Circle"
+        android:layout_width="@dimen/_35sdp"
+        android:layout_height="@dimen/_35sdp"
+        android:layout_centerInParent="true"
+        android:visibility="visible"
+        app:SpinKit_Color="@android:color/white"
+        app:layout_constraintBottom_toBottomOf="@+id/img_curved_bg"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/edit_phone_number" />
+
+    <TextView
+        android:id="@+id/txt_message"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/_10sdp"
+        tools:text="Loading"
+        android:textSize="@dimen/_10ssp"
+        android:textColor="@android:color/white"
+        app:layout_constraintEnd_toEndOf="@+id/spinner_loader"
+        app:layout_constraintStart_toStartOf="@+id/spinner_loader"
+        app:layout_constraintTop_toBottomOf="@+id/spinner_loader" />
+
+    <ImageView
+        android:id="@+id/img_curved_bg"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/_30sdp"
+        android:background="@drawable/shape_botom_curve"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/guideline3"
+        tools:ignore="ContentDescription" />
+
+    <View
+        android:id="@+id/view_white_block"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:background="@android:color/white"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="1.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/img_curved_bg" />
+
+    <Button
+        android:id="@+id/btn_login"
+        android:layout_width="wrap_content"
+        android:layout_height="@dimen/_40sdp"
+        android:layout_marginTop="@dimen/_10sdp"
+        android:paddingStart="@dimen/_40sdp"
+        android:paddingEnd="@dimen/_40sdp"
+        android:background="@drawable/bg_common_btn"
+        android:text="@string/text_btn_log_in"
+        android:textColor="@android:color/white"
+        app:layout_constraintEnd_toEndOf="@+id/view_white_block"
+        app:layout_constraintStart_toStartOf="@+id/view_white_block"
+        app:layout_constraintTop_toTopOf="@+id/img_curved_bg" />
+
+    <TextView
+        android:id="@+id/txt_login_subtitle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/login_or_login_with"
+        android:textColor="@android:color/black"
+        android:layout_marginTop="@dimen/_20sdp"
+        android:textStyle="bold"
+        app:layout_constraintEnd_toEndOf="@+id/view_white_block"
+        app:layout_constraintStart_toStartOf="@+id/view_white_block"
+        app:layout_constraintTop_toBottomOf="@+id/btn_login" />
+
+    <Button
+        android:id="@+id/btn_facebook"
+        android:layout_width="@dimen/_35sdp"
+        android:layout_height="@dimen/_35sdp"
+        android:layout_marginTop="20dp"
+        android:layout_marginEnd="20dp"
+        android:background="@drawable/ic_circle_facebook"
+        app:layout_constraintEnd_toStartOf="@+id/guideline_horizontal_center"
+        app:layout_constraintTop_toBottomOf="@+id/txt_login_subtitle" />
+
+    <Button
+        android:id="@+id/btn_gmail"
+        android:layout_width="@dimen/_35sdp"
+        android:layout_height="@dimen/_35sdp"
+        android:layout_marginStart="20dp"
+        android:layout_marginTop="20dp"
+        android:background="@drawable/ic_circle_google"
+        app:layout_constraintStart_toStartOf="@+id/guideline_horizontal_center"
+        app:layout_constraintTop_toBottomOf="@+id/txt_login_subtitle" />
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/guideline_left_padding"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        app:layout_constraintGuide_begin="@dimen/_20sdp" />
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/guideline_title"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        app:layout_constraintGuide_percent="0.15" />
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/guideline3"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        app:layout_constraintGuide_percent="0.65" />
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/guideline_horizontal_center"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        app:layout_constraintGuide_percent="0.50" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>

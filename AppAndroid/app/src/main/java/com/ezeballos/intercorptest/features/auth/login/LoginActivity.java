@@ -1,4 +1,4 @@
-package com.ezeballos.intercorptest.features.home;
+package com.ezeballos.intercorptest.features.auth.login;
 
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -6,7 +6,7 @@ import android.os.Bundle;
 
 import com.ezeballos.intercorptest.R;
 
-public class MainActivity extends AppCompatActivity {
+public class LoginActivity extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

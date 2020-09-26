@@ -1,3 +1,9 @@
 <resources>
     <string name="app_name">IntercorpTest</string>
+    <string name="_19_extended">Intercorp Test</string>
+    <string name="login_title_intercorp_test">Intercorp Test</string>
+    <string name="login_title_log_in">Log in</string>
+    <string name="login_mobile_number">Mobile number</string>
+    <string name="login_or_login_with">or login with</string>
+    <string name="text_btn_log_in">Log in</string>
 </resources>
