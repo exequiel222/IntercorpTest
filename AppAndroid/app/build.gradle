@@ -1,5 +1,14 @@
 apply plugin: 'com.android.application'
 apply plugin: 'me.moallemi.advanced-build-version'
+apply plugin: 'kotlin-android'
+apply plugin: 'kotlin-kapt'
+apply plugin: 'kotlin-android-extensions'
+
+kapt {
+    arguments {
+        arg("AROUTER_MODULE_NAME", project.getName())
+    }
+}
 
 //Configuración de herramienta de versionado el apk
 advancedVersioning {
@@ -72,9 +81,14 @@ dependencies {
     implementation 'com.google.android.gms:play-services-auth:18.1.0'
     implementation 'com.google.firebase:firebase-auth:19.4.0'
 
-    //Material
-    implementation 'com.google.android.material:material:1.1.0-alpha07'
 
     //UI components
     implementation 'com.github.ybq:Android-SpinKit:1.4.0'
+
+    // Koin dependeci injection
+    implementation "org.koin:koin-core:2.2.0-alpha-1"
+    implementation "org.koin:koin-core:2.2.0-alpha-1"
+    implementation "org.koin:koin-android:2.2.0-alpha-1"
+    implementation "org.koin:koin-android-viewmodel:2.2.0-alpha-1"
+    implementation "org.koin:koin-android-architecture:0.8.2"
 }
