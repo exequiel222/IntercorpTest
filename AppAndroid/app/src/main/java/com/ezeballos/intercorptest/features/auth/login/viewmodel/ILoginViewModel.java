@@ -10,4 +10,5 @@ public interface ILoginViewModel {
 
     void doOtpLogin();
     void doFacebookLogin(@NonNull final Activity activity, @NonNull final LoginButton loginButton);
+    void doGmailLogin();
 }

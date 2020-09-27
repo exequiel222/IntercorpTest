@@ -8,7 +8,9 @@ public interface IBaseViewActions {
     /**
      * Initialize views
      */
-    void initViews();
+    default void initViews(){
+        // Do nothing for default
+    }
 
     /**
      * Set observers on ViewModel

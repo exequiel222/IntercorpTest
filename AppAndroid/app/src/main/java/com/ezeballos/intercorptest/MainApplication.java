@@ -2,6 +2,9 @@ package com.ezeballos.intercorptest;
 
 import androidx.multidex.MultiDexApplication;
 
+import com.facebook.FacebookSdk;
+import com.facebook.appevents.AppEventsLogger;
+
 import org.koin.android.java.KoinAndroidApplication;
 import org.koin.core.KoinApplication;
 import org.koin.core.context.GlobalContext;
@@ -18,5 +21,7 @@ public class MainApplication extends MultiDexApplication {
         KoinApplication koin = KoinAndroidApplication.create(this)
                 .modules(loginModule, socialModule);
         startKoin(new GlobalContext(), koin);
+        FacebookSdk.sdkInitialize(getApplicationContext());
+        AppEventsLogger.activateApp(this);
     }
 }

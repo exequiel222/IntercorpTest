@@ -68,13 +68,23 @@ public class LoginViewModelDelegate {
     }
     //endregion
 
-    //region Goto next page
-    private MutableLiveData<Event<None>> goToNextPage = new MutableLiveData<>();
-    public LiveData<Event<None>> getGoToNextPage(){
-        return goToNextPage;
+    //region Goto verify page
+    private MutableLiveData<Event<None>> goToVerifyPage = new MutableLiveData<>();
+    public LiveData<Event<None>> getGoToVerifyPage(){
+        return goToVerifyPage;
     }
-    public void goToNextPagePostValue(){
-        goToNextPage.setValue(new Event<>(new None()));
+    public void goToVerifyPagePostValue(){
+        goToVerifyPage.setValue(new Event<>(new None()));
+    }
+    //endregion
+
+    //region Goto home page
+    private MutableLiveData<Event<None>> goToHomePage = new MutableLiveData<>();
+    public LiveData<Event<None>> getGoToHomePage(){
+        return goToHomePage;
+    }
+    public void goToHomePagePostValue(){
+        goToHomePage.setValue(new Event<>(new None()));
     }
     //endregion
 }

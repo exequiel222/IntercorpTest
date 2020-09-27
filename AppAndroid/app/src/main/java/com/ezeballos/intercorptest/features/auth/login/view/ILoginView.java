@@ -3,20 +3,22 @@ package com.ezeballos.intercorptest.features.auth.login.view;
 import androidx.annotation.NonNull;
 
 import com.ezeballos.intercorptest.core.ui.Event;
+import com.ezeballos.intercorptest.core.ui.None;
 
 public interface ILoginView {
 
-    void showProgress(@NonNull Event<Void> event);
-    void hideProgress(@NonNull Event<Void> event);
+    void showProgress(@NonNull Event<None> event);
+    void hideProgress(@NonNull Event<None> event);
 
-    void showMessage(@NonNull Event<Void> event);
-    void hideMessage(@NonNull Event<Void> event);
+    void showMessage(@NonNull Event<String> event);
+    void hideMessage(@NonNull Event<None> event);
 
-    void clearAreaCodeText(@NonNull Event<Void> event);
-    void clearNumberPhoneText(@NonNull Event<Void> event);
+    void clearAreaCodeText(@NonNull Event<None> event);
+    void clearNumberPhoneText(@NonNull Event<None> event);
 
-    void requestFocusOnUserName(@NonNull Event<Void> event);
-    void requestFocusOnPassword(@NonNull Event<Void> event);
+    void requestFocusOnPhoneNumber(@NonNull Event<None> event);
+    void requestFocusOnAreaCode(@NonNull Event<None> event);
 
-    void goToNextPage(@NonNull Event<Void> event);
+    void goToVerifyPage(@NonNull Event<None> event);
+    void goToHomePage(@NonNull Event<None> event);
 }

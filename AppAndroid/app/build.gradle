@@ -10,7 +10,7 @@ kapt {
     }
 }
 
-//Configuración de herramienta de versionado el apk
+//Configuración de herramienta para el versionado del apk
 advancedVersioning {
     nameOptions {
         versionMajor 0

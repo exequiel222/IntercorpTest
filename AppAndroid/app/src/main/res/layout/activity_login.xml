@@ -129,7 +129,7 @@
         android:layout_width="@dimen/_35sdp"
         android:layout_height="@dimen/_35sdp"
         android:layout_centerInParent="true"
-        android:visibility="visible"
+        android:visibility="gone"
         app:SpinKit_Color="@android:color/white"
         app:layout_constraintBottom_toBottomOf="@+id/img_curved_bg"
         app:layout_constraintEnd_toEndOf="parent"
@@ -142,6 +142,7 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="@dimen/_10sdp"
         tools:text="Loading"
+        android:visibility="gone"
         android:textSize="@dimen/_10ssp"
         android:textColor="@android:color/white"
         app:layout_constraintEnd_toEndOf="@+id/spinner_loader"
@@ -179,6 +180,7 @@
         android:background="@drawable/bg_common_btn"
         android:text="@string/text_btn_log_in"
         android:textColor="@android:color/white"
+        android:onClick="loginOnClick"
         app:layout_constraintEnd_toEndOf="@+id/view_white_block"
         app:layout_constraintStart_toStartOf="@+id/view_white_block"
         app:layout_constraintTop_toTopOf="@+id/img_curved_bg" />
@@ -202,6 +204,7 @@
         android:layout_marginTop="20dp"
         android:layout_marginEnd="20dp"
         android:background="@drawable/ic_circle_facebook"
+        android:onClick="facebookLoginOnClick"
         app:layout_constraintEnd_toStartOf="@+id/guideline_horizontal_center"
         app:layout_constraintTop_toBottomOf="@+id/txt_login_subtitle" />
 
@@ -212,6 +215,7 @@
         android:layout_marginStart="20dp"
         android:layout_marginTop="20dp"
         android:background="@drawable/ic_circle_google"
+        android:onClick="googleLoginOnClick"
         app:layout_constraintStart_toStartOf="@+id/guideline_horizontal_center"
         app:layout_constraintTop_toBottomOf="@+id/txt_login_subtitle" />
 
@@ -242,5 +246,23 @@
         android:layout_height="wrap_content"
         android:orientation="vertical"
         app:layout_constraintGuide_percent="0.50" />
+
+    <com.facebook.login.widget.LoginButton
+        android:id="@+id/button_facebook_login"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:layout_centerVertical="true"
+        android:visibility="gone"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
+
+    <com.google.android.gms.common.SignInButton
+        android:id="@+id/sign_in_google_button"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:visibility="gone"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"/>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

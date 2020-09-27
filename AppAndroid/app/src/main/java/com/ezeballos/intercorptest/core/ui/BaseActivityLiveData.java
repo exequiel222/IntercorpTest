@@ -12,12 +12,12 @@ import androidx.viewbinding.ViewBinding;
 
 import com.ezeballos.intercorptest.R;
 
-public abstract class BaseActivityLiveData extends AppCompatActivity implements IBaseViewActions {
+public abstract class BaseActivityLiveData<ViewBindingT extends ViewBinding> extends AppCompatActivity implements IBaseViewActions {
 
-    protected ViewBinding vBinding;
+    protected ViewBindingT vBinding;
 
     @NonNull
-    protected abstract ViewBinding getViewBinding();
+    protected abstract ViewBindingT getViewBinding();
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {

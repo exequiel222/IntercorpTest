@@ -48,6 +48,12 @@ public class LoginViewModel extends ViewModel implements ILoginViewModel {
         loginUseCase.loginWithFacebook(activity, loginButton);
     }
 
+    @Override
+    public void doGmailLogin() {
+        delegate.showProgressPostValue();
+        delegate.showMessagePostValue("cargando el login");
+    }
+
     public void addFirebaseListener(){
         if (!EventBus.getDefault().isRegistered(this)) {
             EventBus.getDefault().register(this);
@@ -77,5 +83,10 @@ public class LoginViewModel extends ViewModel implements ILoginViewModel {
     public void signedCompleted(@NonNull final FirebaseAuthListener.FirebaseAuthSignedIn signedIn){
         delegate.hideProgressPostValue();
         delegate.showMessagePostValue("Log in completed :)");
+    }
+
+    @NonNull
+    public LoginViewModelDelegate getDelegate() {
+        return delegate;
     }
 }

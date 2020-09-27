@@ -6,4 +6,9 @@
     <string name="login_mobile_number">Mobile number</string>
     <string name="login_or_login_with">or login with</string>
     <string name="text_btn_log_in">Log in</string>
+
+
+    <string name="facebook_app_id">1078187835967635</string>
+    <string name="fb_login_protocol_scheme">fb1078187835967635</string>
+
 </resources>
