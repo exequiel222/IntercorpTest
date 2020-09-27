@@ -29,12 +29,12 @@ public class LoginViewModelDelegate {
     //endregion
 
     //region Show message
-    private MutableLiveData<Event<None>> showMessage = new MutableLiveData<>();
-    public LiveData<Event<None>> getShowMessage(){
+    private MutableLiveData<Event<String>> showMessage = new MutableLiveData<>();
+    public LiveData<Event<String>> getShowMessage(){
         return showMessage;
     }
-    public void showMessagePostValue(){
-        showMessage.setValue(new Event<>(new None()));
+    public void showMessagePostValue(String message){
+        showMessage.setValue(new Event<>(message));
     }
     //endregion
 
@@ -44,7 +44,7 @@ public class LoginViewModelDelegate {
         return hideMessage;
     }
     public void hideMessagePostValue(){
-        showMessage.setValue(new Event<>(new None()));
+        hideMessage.setValue(new Event<>(new None()));
     }
     //endregion
 

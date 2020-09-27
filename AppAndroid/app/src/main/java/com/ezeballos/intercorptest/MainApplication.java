@@ -2,8 +2,6 @@ package com.ezeballos.intercorptest;
 
 import androidx.multidex.MultiDexApplication;
 
-import com.ezeballos.intercorptest.features.auth.login.di.LoginModuleKt;
-
 import org.koin.android.java.KoinAndroidApplication;
 import org.koin.core.KoinApplication;
 import org.koin.core.context.GlobalContext;

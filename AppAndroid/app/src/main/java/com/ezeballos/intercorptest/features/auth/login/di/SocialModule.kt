@@ -16,6 +16,7 @@ val socialModule = module {
     factory { createFirebaseAuth() }
     factory { createFirebaseSupportMethods() }
     factory { createFirebaseAuthListener() }
+    factory { createCallbackManager() }
 }
 
 fun createFacebookLoginService(
