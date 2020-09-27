@@ -1,11 +1,10 @@
-package com.ezeballos.intercorptest.features.auth.login.services;
+package com.ezeballos.intercorptest.features.auth.login.services.facebook;
 
 import android.app.Activity;
 import android.content.Intent;
 import android.util.Log;
 
 import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
 
 import com.ezeballos.intercorptest.core.firebase.FirebaseSigInErrors;
 import com.ezeballos.intercorptest.core.firebase.FirebaseSupportMethods;

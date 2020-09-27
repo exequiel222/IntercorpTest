@@ -2,8 +2,10 @@ package com.ezeballos.intercorptest.features.auth.login.viewmodel;
 
 import android.app.Activity;
 import android.content.Intent;
+import android.util.Log;
 
 import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.lifecycle.ViewModel;
 
 import com.ezeballos.intercorptest.core.firebase.FirebaseAuthListener;
@@ -39,19 +41,38 @@ public class LoginViewModel extends ViewModel implements ILoginViewModel {
     }
 
     @Override
-    public void doOtpLogin() {
+    public void doOtpLogin(@Nullable final String areaCode,
+                           @Nullable final String phoneNumber,
+                           @NonNull final Activity activity) {
+        if (!loginUseCase.isValidCodeArea(areaCode)){
+            delegate.showMessagePostValue("Datos inválidos en el codigo de area");
+            delegate.requestFocusOnAreaCodePostValue();
+            return;
+        }
 
+        if (!loginUseCase.isValidPhoneNumber(phoneNumber)){
+            delegate.showMessagePostValue("Datos inválidos en el numero");
+            delegate.requestFocusOnPhonePostValue();
+            return;
+        }
+        loginUseCase.loginWithOtp(activity,areaCode+phoneNumber);
     }
 
     @Override
     public void doFacebookLogin(@NonNull final Activity activity, @NonNull final LoginButton loginButton) {
-        loginUseCase.loginWithFacebook(activity, loginButton);
+        delegate.showProgressPostValue();
+        delegate.showMessagePostValue("Ingresando via facebook");
+        loginUseCase.loginWithFacebook(activity, loginButton, firebaseSigInError -> {
+            delegate.hideMessagePostValue();
+            delegate.hideProgressPostValue();
+        });
     }
 
     @Override
-    public void doGmailLogin() {
+    public void doGmailLogin(@NonNull final Activity activity) {
         delegate.showProgressPostValue();
-        delegate.showMessagePostValue("cargando el login");
+        delegate.showMessagePostValue("Ingresando via Gmail");
+        loginUseCase.loginWithGmail(activity);
     }
 
     public void addFirebaseListener(){
@@ -68,9 +89,8 @@ public class LoginViewModel extends ViewModel implements ILoginViewModel {
         firebaseAuth.removeAuthStateListener(firebaseAuthListener.authLister);
     }
 
-    public void handleResultFromActivity(Intent data){
-        delegate.showProgressPostValue();
-
+    public void handleResultFromActivity(int requestCode, int resultCode, @NonNull Intent data){
+        loginUseCase.handleActivityResults(requestCode, resultCode, data);
     }
 
     @Subscribe(threadMode = ThreadMode.MAIN)

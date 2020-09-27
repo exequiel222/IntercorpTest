@@ -1,6 +1,8 @@
 package com.ezeballos.intercorptest.features.auth.login.di
 
-import com.ezeballos.intercorptest.features.auth.login.services.IFacebookLoginService
+import com.ezeballos.intercorptest.features.auth.login.services.facebook.IFacebookLoginService
+import com.ezeballos.intercorptest.features.auth.login.services.gmail.IGmailLoginService
+import com.ezeballos.intercorptest.features.auth.login.services.otp.IOtpLoginService
 import com.ezeballos.intercorptest.features.auth.login.usecase.ILoginUseCase
 import com.ezeballos.intercorptest.features.auth.login.usecase.LoginUseCase
 import com.ezeballos.intercorptest.features.auth.login.viewmodel.LoginViewModel
@@ -17,11 +19,14 @@ val loginModule = module {
     factory { createLoginViewModelDelegate() }
 
     // single instance of useCase
-    factory { createILoginUseCase(get()) }
+    factory { createILoginUseCase(get(), get(), get()) }
 }
 
-fun createILoginUseCase(facebookService: IFacebookLoginService): ILoginUseCase {
-    return LoginUseCase(facebookService)
+fun createILoginUseCase(
+        facebookService: IFacebookLoginService,
+        gmailService: IGmailLoginService,
+        otpService: IOtpLoginService): ILoginUseCase {
+    return LoginUseCase(facebookService, gmailService, otpService)
 }
 
 fun createLoginViewModelDelegate(): LoginViewModelDelegate {
