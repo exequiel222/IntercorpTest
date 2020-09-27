@@ -53,6 +53,15 @@ android {
     buildFeatures {
         viewBinding = true
     }
+
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_1_8
+        targetCompatibility JavaVersion.VERSION_1_8
+    }
+    // For Kotlin projects
+    kotlinOptions {
+        jvmTarget = "1.8"
+    }
 }
 
 dependencies {
@@ -85,10 +94,13 @@ dependencies {
     //UI components
     implementation 'com.github.ybq:Android-SpinKit:1.4.0'
 
-    // Koin dependeci injection
+    // Koin dependecy injection
     implementation "org.koin:koin-core:2.2.0-alpha-1"
     implementation "org.koin:koin-core:2.2.0-alpha-1"
     implementation "org.koin:koin-android:2.2.0-alpha-1"
     implementation "org.koin:koin-android-viewmodel:2.2.0-alpha-1"
     implementation "org.koin:koin-android-architecture:0.8.2"
+
+    //EventBus
+    implementation 'org.greenrobot:eventbus:3.1.1'
 }

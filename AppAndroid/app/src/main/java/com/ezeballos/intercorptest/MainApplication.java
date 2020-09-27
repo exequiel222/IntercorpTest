@@ -9,6 +9,7 @@ import org.koin.core.KoinApplication;
 import org.koin.core.context.GlobalContext;
 
 import static com.ezeballos.intercorptest.features.auth.login.di.LoginModuleKt.loginModule;
+import static com.ezeballos.intercorptest.features.auth.login.di.SocialModuleKt.socialModule;
 import static org.koin.core.context.ContextFunctionsKt.startKoin;
 public class MainApplication extends MultiDexApplication {
 
@@ -17,7 +18,7 @@ public class MainApplication extends MultiDexApplication {
         super.onCreate();
         // Start Koin
         KoinApplication koin = KoinAndroidApplication.create(this)
-                .modules(loginModule);
+                .modules(loginModule, socialModule);
         startKoin(new GlobalContext(), koin);
     }
 }
