@@ -56,6 +56,7 @@ public class LoginViewModel extends ViewModel implements ILoginViewModel {
             return;
         }
         loginUseCase.loginWithOtp(activity,areaCode+phoneNumber);
+        delegate.goToVerifyPagePostValue();
     }
 
     @Override

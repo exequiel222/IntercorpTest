@@ -22,6 +22,7 @@ import com.ezeballos.intercorptest.features.auth.login.viewmodel.ILoginViewModel
 import com.ezeballos.intercorptest.features.auth.login.viewmodel.LoginViewModel;
 import com.ezeballos.intercorptest.features.auth.login.viewmodel.LoginViewModelDelegate;
 import com.ezeballos.intercorptest.features.home.MainActivity;
+import com.ezeballos.intercorptest.features.verify.VerifyCodeActivity;
 
 import kotlin.Lazy;
 
@@ -135,9 +136,8 @@ public class LoginActivity extends BaseActivityLiveData<ActivityLoginBinding> im
     @Override
     public void goToVerifyPage(@NonNull Event<None> event) {
         if(!event.isHasBeenHandled()){
-            Intent intent = new Intent(this, MainActivity.class);
+            Intent intent = new Intent(this, VerifyCodeActivity.class);
             startActivity(intent);
-            finish();
         }
     }
 
