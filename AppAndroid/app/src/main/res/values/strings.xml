@@ -16,5 +16,7 @@
 
     <string name="facebook_app_id">1078187835967635</string>
     <string name="fb_login_protocol_scheme">fb1078187835967635</string>
+    <string name="register_title_log_in">Register</string>
+    <string name="register_mobile_number">"Name: "</string>
 
 </resources>

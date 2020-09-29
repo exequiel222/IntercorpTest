@@ -2,30 +2,26 @@ package com.ezeballos.intercorptest.features.auth.login.view;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.viewbinding.ViewBinding;
 
-import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
-import android.view.inputmethod.InputMethodManager;
-import android.widget.EditText;
 
-import com.ezeballos.intercorptest.R;
 import com.ezeballos.intercorptest.core.ui.BaseActivityLiveData;
 import com.ezeballos.intercorptest.core.ui.Event;
-import com.ezeballos.intercorptest.core.ui.IObserverAction;
 import com.ezeballos.intercorptest.core.ui.None;
 import com.ezeballos.intercorptest.databinding.ActivityLoginBinding;
-import com.ezeballos.intercorptest.features.auth.login.viewmodel.ILoginViewModel;
 import com.ezeballos.intercorptest.features.auth.login.viewmodel.LoginViewModel;
 import com.ezeballos.intercorptest.features.auth.login.viewmodel.LoginViewModelDelegate;
 import com.ezeballos.intercorptest.features.home.MainActivity;
-import com.ezeballos.intercorptest.features.verify.VerifyCodeActivity;
+import com.ezeballos.intercorptest.features.register.view.RegisterActivity;
+import com.ezeballos.intercorptest.features.verify.view.VerifyCodeActivity;
 
 import kotlin.Lazy;
 
+import static com.ezeballos.intercorptest.features.auth.login.services.gmail.GmailLoginService.REQ_LOG_GOOGLE;
+import static com.ezeballos.intercorptest.features.register.view.RegisterActivity.UUID_KEY;
+import static com.ezeballos.intercorptest.features.verify.view.VerifyCodeActivity.OTP_CODE_SEND_KEY;
 import static org.koin.java.KoinJavaComponent.bind;
 import static org.koin.java.KoinJavaComponent.inject;
 
@@ -48,7 +44,7 @@ public class LoginActivity extends BaseActivityLiveData<ActivityLoginBinding> im
     @Override
     public void initObserversOfViewModel() {
         LoginViewModelDelegate delegateVm = viewModel.getValue().getDelegate();
-        observe(delegateVm.getGoToHomePage(), this::goToHomePage);
+        observe(delegateVm.getGoToHomePage(), this::goToRegisterPage);
         observe(delegateVm.getGoToVerifyPage(), this::goToVerifyPage);
         observe(delegateVm.getHideMessage(), this::hideMessage);
         observe(delegateVm.getHideProgress(), this::hideProgress);
@@ -56,22 +52,6 @@ public class LoginActivity extends BaseActivityLiveData<ActivityLoginBinding> im
         observe(delegateVm.getRequestFocusOnPhone(), this::requestFocusOnPhoneNumber);
         observe(delegateVm.getShowMessage(), this::showMessage);
         observe(delegateVm.getShowProgress(), this::showProgress);
-    }
-
-    public void loginOnClick(View view) {
-        viewModel.getValue().doOtpLogin(
-                vBinding.editPhoneAreaCode.getText().toString(),
-                vBinding.editPhoneNumber.getText().toString(),
-                this);
-    }
-
-    public void facebookLoginOnClick(View view) {
-        viewModel.getValue().doFacebookLogin(this, vBinding.buttonFacebookLogin);
-        vBinding.buttonFacebookLogin.performClick();
-    }
-
-    public void googleLoginOnClick(View view) {
-        viewModel.getValue().doGmailLogin(this);
     }
 
     @Override
@@ -134,17 +114,19 @@ public class LoginActivity extends BaseActivityLiveData<ActivityLoginBinding> im
     }
 
     @Override
-    public void goToVerifyPage(@NonNull Event<None> event) {
+    public void goToVerifyPage(@NonNull Event<String> event) {
         if(!event.isHasBeenHandled()){
             Intent intent = new Intent(this, VerifyCodeActivity.class);
+            intent.putExtra(OTP_CODE_SEND_KEY, event.getContentIfNotHandled());
             startActivity(intent);
         }
     }
 
     @Override
-    public void goToHomePage(@NonNull Event<None> event) {
+    public void goToRegisterPage(@NonNull Event<String> event) {
         if(!event.isHasBeenHandled()){
-            Intent intent = new Intent(this, MainActivity.class);
+            Intent intent = new Intent(this, RegisterActivity.class);
+            intent.putExtra(UUID_KEY, event.getContentIfNotHandled());
             startActivity(intent);
             finish();
         }
@@ -165,11 +147,31 @@ public class LoginActivity extends BaseActivityLiveData<ActivityLoginBinding> im
     @Override
     protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
-        viewModel.getValue().handleResultFromActivity(requestCode, resultCode, data);
+        if (requestCode == REQ_LOG_GOOGLE){
+            viewModel.getValue().handleResultFromActivity(data);
+        }else{
+            viewModel.getValue().handleResultFromActivity(requestCode, resultCode, data);
+        }
     }
 
-    private void showKeyboard(@NonNull final EditText editText){
-        InputMethodManager imm = (InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE);
-        imm.showSoftInput(editText, InputMethodManager.SHOW_IMPLICIT);
+    @Override
+    public void onClickLogin(@NonNull final View view) {
+        viewModel.getValue().doOtpLogin(
+                vBinding.editPhoneAreaCode.getText().toString(),
+                vBinding.editPhoneNumber.getText().toString(),
+                this);
+    }
+
+    @Override
+    public void onClickFacebookLogin(@NonNull final View view) {
+        viewModel.getValue().doFacebookLogin(this, vBinding.buttonFacebookLogin);
+        vBinding.buttonFacebookLogin.requestFocus();
+        vBinding.buttonFacebookLogin.performClick();
+    }
+
+    @Override
+    public void onClickGoogleLogin(@NonNull final View view) {
+        vBinding.btnGmail.requestFocus();
+        viewModel.getValue().doGmailLogin(this);
     }
 }

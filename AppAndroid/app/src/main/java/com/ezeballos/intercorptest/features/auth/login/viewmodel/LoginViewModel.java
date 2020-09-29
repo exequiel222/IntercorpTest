@@ -2,13 +2,12 @@ package com.ezeballos.intercorptest.features.auth.login.viewmodel;
 
 import android.app.Activity;
 import android.content.Intent;
-import android.util.Log;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.lifecycle.ViewModel;
 
-import com.ezeballos.intercorptest.core.firebase.FirebaseAuthListener;
+import com.ezeballos.intercorptest.features.auth.login.services.FirebaseAuthListener;
 import com.ezeballos.intercorptest.features.auth.login.usecase.ILoginUseCase;
 import com.facebook.login.widget.LoginButton;
 import com.google.firebase.auth.FirebaseAuth;
@@ -56,7 +55,6 @@ public class LoginViewModel extends ViewModel implements ILoginViewModel {
             return;
         }
         loginUseCase.loginWithOtp(activity,areaCode+phoneNumber);
-        delegate.goToVerifyPagePostValue();
     }
 
     @Override
@@ -64,7 +62,7 @@ public class LoginViewModel extends ViewModel implements ILoginViewModel {
         delegate.showProgressPostValue();
         delegate.showMessagePostValue("Ingresando via facebook");
         loginUseCase.loginWithFacebook(activity, loginButton, firebaseSigInError -> {
-            delegate.hideMessagePostValue();
+            delegate.showMessagePostValue(firebaseSigInError.name());
             delegate.hideProgressPostValue();
         });
     }
@@ -91,19 +89,47 @@ public class LoginViewModel extends ViewModel implements ILoginViewModel {
     }
 
     public void handleResultFromActivity(int requestCode, int resultCode, @NonNull Intent data){
-        loginUseCase.handleActivityResults(requestCode, resultCode, data);
+        loginUseCase.handleActivityResultsForFacebook(requestCode, resultCode, data);
+    }
+
+    public void handleResultFromActivity(@NonNull Intent data){
+        loginUseCase.handleActivityResultsForGmail(data, firebaseSigInError -> {
+            delegate.showMessagePostValue(firebaseSigInError.name());
+            delegate.hideProgressPostValue();
+        });
     }
 
     @Subscribe(threadMode = ThreadMode.MAIN)
-    public void firebaseLoginFail(@NonNull final FirebaseAuthListener.FirebaseLoginFail firebaseLoginFail){
+    public void firebaseLoginFail(@NonNull final FirebaseAuthListener.FirebaseLoginFailEvent firebaseLoginFailEvent){
         delegate.hideProgressPostValue();
-        delegate.showMessagePostValue(firebaseLoginFail.toString());
+        delegate.showMessagePostValue(firebaseLoginFailEvent.toString());
     }
 
     @Subscribe(threadMode = ThreadMode.MAIN)
-    public void signedCompleted(@NonNull final FirebaseAuthListener.FirebaseAuthSignedIn signedIn){
+    public void signedCompleted(@NonNull final FirebaseAuthListener.FirebaseAuthSignedInEvent signedIn){
         delegate.hideProgressPostValue();
         delegate.showMessagePostValue("Log in completed :)");
+        delegate.goToHomePagePostValue(signedIn.getFirebaseUser().getUid());
+    }
+
+    @Subscribe(threadMode = ThreadMode.MAIN)
+    public void otpVerificationFailed(@NonNull final FirebaseAuthListener.OtpVerificationFaliedEvent event){
+        delegate.hideProgressPostValue();
+        delegate.showMessagePostValue(event.getErrors().name());
+    }
+
+    @Subscribe(threadMode = ThreadMode.MAIN)
+    public void otpVerificationCompleted(@NonNull final FirebaseAuthListener.OtpVerificationCompletedEvent event){
+        delegate.hideProgressPostValue();
+        delegate.hideMessagePostValue();
+        //Este caso lo dejo pendiente, acá hay que loguear directamente al usuario sin validar codigo
+    }
+
+    @Subscribe(threadMode = ThreadMode.MAIN)
+    public void otpSendCode(@NonNull final FirebaseAuthListener.OtpCodeSentEvent event){
+        delegate.hideProgressPostValue();
+        delegate.hideMessagePostValue();
+        delegate.goToVerifyPagePostValue(event.getCodeSent());
     }
 
     @NonNull

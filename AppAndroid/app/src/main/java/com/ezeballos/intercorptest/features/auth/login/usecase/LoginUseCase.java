@@ -9,6 +9,7 @@ import androidx.annotation.Nullable;
 import com.ezeballos.intercorptest.features.auth.login.services.facebook.IFacebookLoginService;
 import com.ezeballos.intercorptest.features.auth.login.services.facebook.IFacebookServiceFail;
 import com.ezeballos.intercorptest.features.auth.login.services.gmail.IGmailLoginService;
+import com.ezeballos.intercorptest.features.auth.login.services.gmail.IGmailServiceFail;
 import com.ezeballos.intercorptest.features.auth.login.services.otp.IOtpLoginService;
 import com.facebook.login.widget.LoginButton;
 
@@ -47,8 +48,13 @@ public class LoginUseCase implements ILoginUseCase {
     }
 
     @Override
-    public void handleActivityResults(int requestCode, int resultCode, @NonNull Intent data) {
+    public void handleActivityResultsForFacebook(int requestCode, int resultCode, @NonNull Intent data) {
         facebookLoginService.handleFacebookResult(requestCode, resultCode, data);
+    }
+
+    @Override
+    public void handleActivityResultsForGmail(@NonNull Intent data, @NonNull IGmailServiceFail failureListener) {
+        gmailLoginService.handleGmailResult(data, failureListener);
     }
 
     @Override

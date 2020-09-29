@@ -89,7 +89,7 @@ dependencies {
     //Firebase
     implementation 'com.google.android.gms:play-services-auth:18.1.0'
     implementation 'com.google.firebase:firebase-auth:19.4.0'
-
+    implementation 'com.google.firebase:firebase-database:19.4.0'
 
     //UI components
     implementation 'com.github.ybq:Android-SpinKit:1.4.0'

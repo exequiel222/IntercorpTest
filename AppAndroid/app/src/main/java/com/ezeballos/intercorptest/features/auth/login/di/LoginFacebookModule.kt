@@ -1,6 +1,5 @@
 package com.ezeballos.intercorptest.features.auth.login.di
 
-import com.ezeballos.intercorptest.core.firebase.FirebaseAuthListener
 import com.ezeballos.intercorptest.core.firebase.FirebaseSupportMethods
 import com.ezeballos.intercorptest.features.auth.login.services.facebook.FacebookLoginService
 import com.ezeballos.intercorptest.features.auth.login.services.facebook.IFacebookLoginService

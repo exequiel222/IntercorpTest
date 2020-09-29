@@ -180,7 +180,7 @@
         android:background="@drawable/bg_common_btn"
         android:text="@string/text_btn_log_in"
         android:textColor="@android:color/white"
-        android:onClick="loginOnClick"
+        android:onClick="onClickLogin"
         app:layout_constraintEnd_toEndOf="@+id/view_white_block"
         app:layout_constraintStart_toStartOf="@+id/view_white_block"
         app:layout_constraintTop_toTopOf="@+id/img_curved_bg" />
@@ -204,7 +204,7 @@
         android:layout_marginTop="20dp"
         android:layout_marginEnd="20dp"
         android:background="@drawable/ic_circle_facebook"
-        android:onClick="facebookLoginOnClick"
+        android:onClick="onClickFacebookLogin"
         app:layout_constraintEnd_toStartOf="@+id/guideline_horizontal_center"
         app:layout_constraintTop_toBottomOf="@+id/txt_login_subtitle" />
 
@@ -215,7 +215,7 @@
         android:layout_marginStart="20dp"
         android:layout_marginTop="20dp"
         android:background="@drawable/ic_circle_google"
-        android:onClick="googleLoginOnClick"
+        android:onClick="onClickGoogleLogin"
         app:layout_constraintStart_toStartOf="@+id/guideline_horizontal_center"
         app:layout_constraintTop_toBottomOf="@+id/txt_login_subtitle" />
 

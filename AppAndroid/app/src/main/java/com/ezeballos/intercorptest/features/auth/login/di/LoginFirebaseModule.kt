@@ -1,6 +1,6 @@
 package com.ezeballos.intercorptest.features.auth.login.di
 
-import com.ezeballos.intercorptest.core.firebase.FirebaseAuthListener
+import com.ezeballos.intercorptest.features.auth.login.services.FirebaseAuthListener
 import com.ezeballos.intercorptest.core.firebase.FirebaseSupportMethods
 import com.google.firebase.auth.FirebaseAuth
 import org.koin.dsl.module

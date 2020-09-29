@@ -9,11 +9,12 @@ import org.koin.android.java.KoinAndroidApplication;
 import org.koin.core.KoinApplication;
 import org.koin.core.context.GlobalContext;
 
-import static com.ezeballos.intercorptest.features.auth.login.di.FirebaseModuleKt.firebaseModule;
-import static com.ezeballos.intercorptest.features.auth.login.di.GmailLoginModuleKt.gmailLoginModule;
+import static com.ezeballos.intercorptest.features.auth.login.di.LoginFirebaseModuleKt.firebaseModule;
+import static com.ezeballos.intercorptest.features.auth.login.di.LoginGmailModuleKt.gmailLoginModule;
 import static com.ezeballos.intercorptest.features.auth.login.di.LoginModuleKt.loginModule;
-import static com.ezeballos.intercorptest.features.auth.login.di.FacebookLoginModuleKt.facebookLoginModule;
-import static com.ezeballos.intercorptest.features.auth.login.di.OtpLoginModuleKt.otpLoginModule;
+import static com.ezeballos.intercorptest.features.auth.login.di.LoginFacebookModuleKt.facebookLoginModule;
+import static com.ezeballos.intercorptest.features.auth.login.di.LoginOtpModuleKt.otpLoginModule;
+import static com.ezeballos.intercorptest.features.verify.di.VerifiyModuleKt.verifyModule;
 import static org.koin.core.context.ContextFunctionsKt.startKoin;
 
 public class MainApplication extends MultiDexApplication {
@@ -37,7 +38,8 @@ public class MainApplication extends MultiDexApplication {
                         facebookLoginModule,
                         gmailLoginModule,
                         otpLoginModule,
-                        firebaseModule);
+                        firebaseModule,
+                        verifyModule);
         startKoin(new GlobalContext(), koin);
     }
 }

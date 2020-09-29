@@ -19,7 +19,6 @@
 
         <activity
             android:name=".features.auth.login.view.LoginActivity"
-            android:theme="@style/AppTheme.Launcher"
             android:windowSoftInputMode="adjustResize">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -29,10 +28,11 @@
         </activity>
         <activity
             android:name=".features.home.MainActivity"
-            android:theme="@style/AppTheme.Launcher"
             android:windowSoftInputMode="adjustResize"/>
 
-        <activity android:name=".features.verify.VerifyCodeActivity"/>
+        <activity android:name=".features.verify.view.VerifyCodeActivity"/>
+        <activity android:name=".features.register.view.RegisterActivity">
+        </activity>
     </application>
 
 </manifest>

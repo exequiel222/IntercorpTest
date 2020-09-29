@@ -1,16 +1,16 @@
 package com.ezeballos.intercorptest.core.ui;
 
+import android.content.Context;
 import android.content.pm.ActivityInfo;
 import android.os.Bundle;
+import android.view.inputmethod.InputMethodManager;
+import android.widget.EditText;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.lifecycle.LiveData;
-import androidx.lifecycle.Observer;
 import androidx.viewbinding.ViewBinding;
-
-import com.ezeballos.intercorptest.R;
 
 public abstract class BaseActivityLiveData<ViewBindingT extends ViewBinding> extends AppCompatActivity implements IBaseViewActions {
 
@@ -23,27 +23,20 @@ public abstract class BaseActivityLiveData<ViewBindingT extends ViewBinding> ext
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
-        overridePendingTransition(R.anim.trans_left_in, R.anim.trans_left_out);
         vBinding = getViewBinding();
         setContentView(vBinding.getRoot());
         initViews();
         initObserversOfViewModel();
     }
 
-    @Override
-    public void finish() {
-        super.finish();
-        overridePendingTransition(R.anim.trans_pop_left_in, R.anim.trans_pop_left_out);
-    }
-
     protected <T> void observe(@NonNull final LiveData<T> liveData,
                                @NonNull final IObserverAction<T> action){
-        liveData.observe(this, new Observer<T>() {
-            @Override
-            public void onChanged(@Nullable final T newName) {
-                // Update the UI
-                action.run(newName);
-            }
-        });
+        // Update the UI
+        liveData.observe(this, action::run);
+    }
+
+    protected void showKeyboard(@NonNull final EditText editText){
+        InputMethodManager imm = (InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE);
+        imm.showSoftInput(editText, InputMethodManager.SHOW_IMPLICIT);
     }
 }

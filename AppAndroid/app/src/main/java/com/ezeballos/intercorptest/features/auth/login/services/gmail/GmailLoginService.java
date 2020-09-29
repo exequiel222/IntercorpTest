@@ -9,22 +9,21 @@ import androidx.annotation.Nullable;
 
 import com.ezeballos.intercorptest.core.firebase.FirebaseSigInErrors;
 import com.ezeballos.intercorptest.core.firebase.FirebaseSupportMethods;
-import com.ezeballos.intercorptest.core.firebase.IFirebaseResponse;
 import com.google.android.gms.auth.api.Auth;
 import com.google.android.gms.auth.api.signin.GoogleSignIn;
 import com.google.android.gms.auth.api.signin.GoogleSignInClient;
 import com.google.android.gms.auth.api.signin.GoogleSignInOptions;
 import com.google.android.gms.auth.api.signin.GoogleSignInResult;
+import com.google.android.gms.auth.api.signin.GoogleSignInStatusCodes;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthCredential;
-import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.GoogleAuthProvider;
 
 public class GmailLoginService implements IGmailLoginService {
 
-    public static final String API_ID_CLIENT_WEB = "473990735697-fhpb3s2ef39dqut9f9kf025coomri0oo.apps.googleusercontent.com";
+    public static final String API_ID_CLIENT_WEB = "620633412875-i72dfinksfrtbt36f3g204tgh46omdk0.apps.googleusercontent.com";
     public static final int REQ_LOG_GOOGLE = 12;
 
     @NonNull
@@ -42,50 +41,58 @@ public class GmailLoginService implements IGmailLoginService {
 
     @Override
     public void loginWithGmail(@NonNull Activity activity) {
-        GoogleSignInOptions options = new GoogleSignInOptions
-                .Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
-                .requestIdToken(API_ID_CLIENT_WEB)
-                .requestId()
-                .requestProfile()
-                .requestEmail()
-                .build();
         if (googleApiClient == null){
-            googleApiClient = GoogleSignIn.getClient(activity, options);
+            googleApiClient = GoogleSignIn.getClient(activity, getGoogleOptions());
         }
         Intent gmailSignInIntent = googleApiClient.getSignInIntent();
         activity.startActivityForResult(gmailSignInIntent, REQ_LOG_GOOGLE);
     }
 
     @Override
-    public void handleGmailResult(@NonNull Intent data, @NonNull IFirebaseResponse onResult) {
+    public void handleGmailResult(@NonNull Intent data,
+                                  @NonNull final IGmailServiceFail failureListener) {
         GoogleSignInResult result = Auth.GoogleSignInApi.getSignInResultFromIntent(data);
-        if (result.isSuccess()) {
+        if (result != null && result.isSuccess()) {
             Log.d("Gmail login", "Login con Google signIn exitoso, user: " + result.getSignInAccount().getDisplayName());
             String authToken = result.getSignInAccount().getIdToken();
             AuthCredential credential = GoogleAuthProvider.getCredential(authToken, null);
-            loginSocialAccountWithFirebase(credential, onResult);
+            loginSocialAccountWithFirebase(credential, failureListener);
         }else{
-            String errorMessage = "Error Google signIn code: " + result.getStatus().getStatusCode();
-            Log.d("Gmail login", errorMessage);
-            onResult.onError(FirebaseSigInErrors.ERROR_UNKNOWN);
+            FirebaseSigInErrors error = FirebaseSigInErrors.ERROR_UNKNOWN;
+            if (result != null && GoogleSignInStatusCodes.SIGN_IN_CANCELLED == result.getStatus().getStatusCode()){
+                error = FirebaseSigInErrors.ERROR_LOGIN_CANCEL;
+            }
+            //TODO quedan pendientes otros codigos de errores y el mensaje user-friendly
+            failureListener.failureListener(error);
         }
     }
 
     private void loginSocialAccountWithFirebase(
-            AuthCredential credential,
-            IFirebaseResponse onResult
+            @NonNull final AuthCredential credential,
+            @NonNull final IGmailServiceFail failureListener
     ) {
         firebaseAuth.signInWithCredential(credential)
-                .addOnCompleteListener(task ->
-                {
-                    Log.d("Gmail login", "Se ha completado el login con firebase");
-                    if (task.isSuccessful()){
-                        onResult.onSuccess(task.isSuccessful());
-                    }
-                })
                 .addOnFailureListener(exception -> {
                     Log.d("Gmail login", "Se ha completado el login con firebase");
-                    onResult.onError(firebaseSupportMethods.getFirebaseErrorMessage(exception));
+                    failureListener.failureListener(firebaseSupportMethods.getFirebaseErrorMessage(exception));
                 });
+    }
+
+    @Override
+    public void singOutGmail(@NonNull final Activity activity) {
+        if (googleApiClient == null){
+            googleApiClient = GoogleSignIn.getClient(activity, getGoogleOptions());
+        }
+        googleApiClient.signOut();
+    }
+
+    private GoogleSignInOptions getGoogleOptions(){
+        return new GoogleSignInOptions
+                .Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
+                .requestIdToken(API_ID_CLIENT_WEB)
+                .requestId()
+                .requestProfile()
+                .requestEmail()
+                .build();
     }
 }

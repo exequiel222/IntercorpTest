@@ -5,9 +5,9 @@ import android.content.Intent;
 
 import androidx.annotation.NonNull;
 
-import com.ezeballos.intercorptest.core.firebase.IFirebaseResponse;
-
 public interface IGmailLoginService {
     void loginWithGmail(@NonNull final Activity activity);
-    void handleGmailResult(@NonNull final Intent data, @NonNull final IFirebaseResponse onResult);
+    void handleGmailResult(@NonNull final Intent data,
+                           @NonNull final IGmailServiceFail failureListener);
+    void singOutGmail(@NonNull final Activity activity);
 }

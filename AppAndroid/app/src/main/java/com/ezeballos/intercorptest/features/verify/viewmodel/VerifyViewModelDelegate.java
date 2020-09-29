@@ -1,4 +1,4 @@
-package com.ezeballos.intercorptest.features.auth.login.viewmodel;
+package com.ezeballos.intercorptest.features.verify.viewmodel;
 
 import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
@@ -6,8 +6,7 @@ import androidx.lifecycle.MutableLiveData;
 import com.ezeballos.intercorptest.core.ui.Event;
 import com.ezeballos.intercorptest.core.ui.None;
 
-public class LoginViewModelDelegate {
-
+public class VerifyViewModelDelegate {
     //region Show progress
     private MutableLiveData<Event<None>> showProgress = new MutableLiveData<>();
     public LiveData<Event<None>> getShowProgress(){
@@ -48,42 +47,22 @@ public class LoginViewModelDelegate {
     }
     //endregion
 
-    //region Request focus on area code edit text
-    private MutableLiveData<Event<None>> requestFocusOnAreaCode = new MutableLiveData<>();
-    public LiveData<Event<None>> getRequestFocusOnAreaCode(){
-        return requestFocusOnAreaCode;
+    //region Request focus on code edit text
+    private MutableLiveData<Event<None>> requestFocusOnCode = new MutableLiveData<>();
+    public LiveData<Event<None>> getRequestFocusOnCode(){
+        return requestFocusOnCode;
     }
-    public void requestFocusOnAreaCodePostValue(){
-        requestFocusOnAreaCode.setValue(new Event<>(new None()));
-    }
-    //endregion
-
-    //region Request focus on phone edit text
-    private MutableLiveData<Event<None>> requestFocusOnPhone = new MutableLiveData<>();
-    public LiveData<Event<None>> getRequestFocusOnPhone(){
-        return requestFocusOnPhone;
-    }
-    public void requestFocusOnPhonePostValue(){
-        requestFocusOnPhone.setValue(new Event<>(new None()));
+    public void requestFocusOnCodePostValue(){
+        requestFocusOnCode.setValue(new Event<>(new None()));
     }
     //endregion
 
-    //region Goto verify page
-    private MutableLiveData<Event<String>> goToVerifyPage = new MutableLiveData<>();
-    public LiveData<Event<String>> getGoToVerifyPage(){
-        return goToVerifyPage;
-    }
-    public void goToVerifyPagePostValue(String code){
-        goToVerifyPage.setValue(new Event<>(code));
-    }
-    //endregion
-
-    //region Goto home page
+    //region Goto register page
     private MutableLiveData<Event<String>> goToRegisterPage = new MutableLiveData<>();
-    public LiveData<Event<String>> getGoToHomePage(){
+    public LiveData<Event<String>> getGoToRegisterPage(){
         return goToRegisterPage;
     }
-    public void goToHomePagePostValue(String uuid){
+    public void goToRegisterPagePostValue(String uuid){
         goToRegisterPage.setValue(new Event<>(uuid));
     }
     //endregion

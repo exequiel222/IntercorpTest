@@ -8,7 +8,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/colorPrimary"
-    tools:context=".features.verify.view.VerifyCodeActivity">
+    tools:context=".features.register.view.RegisterActivity">
 
     <TextView
         android:id="@+id/txt_page_title"
@@ -22,10 +22,10 @@
         app:layout_constraintStart_toStartOf="parent" />
 
     <TextView
-        android:id="@+id/txt_verify_title"
+        android:id="@+id/txt_register_title"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="@string/verify_page_title_verify"
+        android:text="@string/register_title_log_in"
         android:textSize="@dimen/dimension_title_component"
         android:textColor="@android:color/white"
         android:textStyle="bold"
@@ -34,68 +34,57 @@
         app:layout_constraintTop_toTopOf="@+id/guideline_title" />
 
     <View
-        android:id="@+id/view_line_verify_title"
+        android:id="@+id/view_line_register_title"
         android:layout_width="0dp"
         android:layout_height="@dimen/_1sdp"
         android:layout_marginEnd="@dimen/_20sdp"
         android:background="@android:color/white"
         android:layout_marginTop="@dimen/_5sdp"
-        app:layout_constraintEnd_toEndOf="@+id/txt_verify_title"
+        app:layout_constraintEnd_toEndOf="@+id/txt_register_title"
         app:layout_constraintStart_toStartOf="@+id/guideline_left_padding"
-        app:layout_constraintTop_toBottomOf="@+id/txt_verify_title" />
+        app:layout_constraintTop_toBottomOf="@+id/txt_register_title" />
 
+    <!-- Name field -->
     <TextView
-        android:id="@+id/textView"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="@dimen/_10sdp"
-        android:layout_marginEnd="@dimen/_20sdp"
-        android:text="OTP has been sent to you on your mobile phone. Please enter it below"
-        android:textColor="@android:color/white"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="@+id/guideline_left_padding"
-        app:layout_constraintTop_toBottomOf="@+id/view_line_verify_title" />
-
-    <TextView
-        android:id="@+id/txt_code_number"
+        android:id="@+id/txt_mobile_number"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="@dimen/_30sdp"
-        android:text="@string/verify_page_mobile_number"
+        android:layout_marginTop="@dimen/_40sdp"
+        android:text="@string/register_mobile_number"
         android:textColor="@android:color/white"
         android:textSize="@dimen/_10ssp"
         android:textStyle="bold"
-        app:layout_constraintStart_toEndOf="@+id/img_code_icon"
-        app:layout_constraintTop_toBottomOf="@+id/textView" />
+        app:layout_constraintStart_toEndOf="@+id/img_phone_icon"
+        app:layout_constraintTop_toBottomOf="@+id/txt_register_title" />
 
     <ImageView
-        android:id="@+id/img_code_icon"
+        android:id="@+id/img_phone_icon"
         android:layout_width="@dimen/_20sdp"
         android:layout_height="@dimen/_20sdp"
         android:layout_marginStart="@dimen/_10sdp"
         android:layout_marginTop="@dimen/_10sdp"
         app:layout_constraintStart_toStartOf="@+id/guideline_left_padding"
-        app:layout_constraintTop_toBottomOf="@+id/txt_code_number"
+        app:layout_constraintTop_toBottomOf="@+id/txt_mobile_number"
         app:srcCompat="@drawable/ic_person_outline_black_24dp"
         tools:ignore="ContentDescription" />
 
     <EditText
-        android:id="@+id/edit_verify_code"
+        android:id="@+id/edit_phone_number"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="@dimen/_10sdp"
-        android:layout_marginEnd="20dp"
-        android:background="@android:color/transparent"
-        android:hint="Code"
-        android:importantForAutofill="no"
+        android:layout_marginEnd="@dimen/_20sdp"
         android:inputType="phone"
         android:maxLines="1"
         android:singleLine="true"
+        android:background="@android:color/transparent"
         android:textColor="@android:color/white"
-        app:layout_constraintBottom_toBottomOf="@+id/img_code_icon"
+        android:hint="First name"
+        app:layout_constraintBottom_toBottomOf="@+id/img_phone_icon"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toEndOf="@+id/img_code_icon"
-        app:layout_constraintTop_toTopOf="@+id/img_code_icon"
+        app:layout_constraintStart_toEndOf="@+id/img_phone_icon"
+        app:layout_constraintTop_toTopOf="@+id/img_phone_icon"
+        android:importantForAutofill="no"
         tools:ignore="LabelFor" />
 
     <View
@@ -104,9 +93,117 @@
         android:layout_height="@dimen/_1sdp"
         android:layout_marginTop="@dimen/_10sdp"
         android:background="@android:color/white"
-        app:layout_constraintEnd_toEndOf="@+id/edit_verify_code"
-        app:layout_constraintStart_toStartOf="@+id/edit_verify_code"
-        app:layout_constraintTop_toBottomOf="@+id/edit_verify_code" />
+        app:layout_constraintEnd_toEndOf="@+id/edit_phone_number"
+        app:layout_constraintStart_toStartOf="@+id/edit_phone_number"
+        app:layout_constraintTop_toBottomOf="@+id/edit_phone_number" />
+
+    <!-- Surname field -->
+    <TextView
+    android:id="@+id/txt_mobile_surname"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:layout_marginTop="@dimen/_10sdp"
+    android:text="Surname: "
+    android:textColor="@android:color/white"
+    android:textSize="@dimen/_10ssp"
+    android:textStyle="bold"
+    app:layout_constraintStart_toEndOf="@+id/img_surname_icon"
+    app:layout_constraintTop_toBottomOf="@+id/view_line_bottom_phone" />
+
+    <ImageView
+        android:id="@+id/img_surname_icon"
+        android:layout_width="@dimen/_20sdp"
+        android:layout_height="@dimen/_20sdp"
+        android:layout_marginStart="@dimen/_10sdp"
+        android:layout_marginTop="@dimen/_10sdp"
+        app:layout_constraintStart_toStartOf="@+id/guideline_left_padding"
+        app:layout_constraintTop_toBottomOf="@+id/txt_mobile_surname"
+        app:srcCompat="@drawable/ic_person_outline_black_24dp"
+        tools:ignore="ContentDescription" />
+
+    <EditText
+        android:id="@+id/edit_surname"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/_10sdp"
+        android:layout_marginEnd="@dimen/_20sdp"
+        android:inputType="phone"
+        android:maxLines="1"
+        android:singleLine="true"
+        android:background="@android:color/transparent"
+        android:textColor="@android:color/white"
+        android:hint="Surname"
+        app:layout_constraintBottom_toBottomOf="@+id/img_surname_icon"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/img_surname_icon"
+        app:layout_constraintTop_toTopOf="@+id/img_surname_icon"
+        android:importantForAutofill="no"
+        tools:ignore="LabelFor" />
+
+    <View
+        android:id="@+id/view_line_bottom_surname"
+        android:layout_width="0dp"
+        android:layout_height="@dimen/_1sdp"
+        android:layout_marginTop="@dimen/_10sdp"
+        android:background="@android:color/white"
+        app:layout_constraintEnd_toEndOf="@+id/edit_surname"
+        app:layout_constraintStart_toStartOf="@+id/edit_surname"
+        app:layout_constraintTop_toBottomOf="@+id/edit_surname" />
+
+    <!-- Age field -->
+    <TextView
+        android:id="@+id/txt_mobile_age"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/_10sdp"
+        android:text="Birthday: "
+        android:textColor="@android:color/white"
+        android:textSize="@dimen/_10ssp"
+        android:textStyle="bold"
+        app:layout_constraintStart_toEndOf="@+id/img_age_icon"
+        app:layout_constraintTop_toBottomOf="@+id/view_line_bottom_surname" />
+
+    <ImageView
+        android:id="@+id/img_age_icon"
+        android:layout_width="@dimen/_20sdp"
+        android:layout_height="@dimen/_20sdp"
+        android:layout_marginStart="@dimen/_10sdp"
+        android:layout_marginTop="@dimen/_10sdp"
+        app:layout_constraintStart_toStartOf="@+id/guideline_left_padding"
+        app:layout_constraintTop_toBottomOf="@+id/txt_mobile_age"
+        app:srcCompat="@drawable/ic_person_outline_black_24dp"
+        tools:ignore="ContentDescription" />
+
+    <EditText
+        android:id="@+id/edit_age"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/_10sdp"
+        android:layout_marginEnd="@dimen/_20sdp"
+        android:inputType="phone"
+        android:maxLines="1"
+        android:singleLine="true"
+        android:background="@android:color/transparent"
+        android:textColor="@android:color/white"
+        android:hint="Birthday"
+        app:layout_constraintBottom_toBottomOf="@+id/img_age_icon"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/img_age_icon"
+        app:layout_constraintTop_toTopOf="@+id/img_age_icon"
+        android:importantForAutofill="no"
+        tools:ignore="LabelFor" />
+
+    <View
+        android:id="@+id/view_line_bottom_age"
+        android:layout_width="0dp"
+        android:layout_height="@dimen/_1sdp"
+        android:layout_marginTop="@dimen/_10sdp"
+        android:background="@android:color/white"
+        app:layout_constraintEnd_toEndOf="@+id/edit_age"
+        app:layout_constraintStart_toStartOf="@+id/edit_age"
+        app:layout_constraintTop_toBottomOf="@+id/edit_age" />
+
+    <!-- Date of birth field -->
 
     <com.github.ybq.android.spinkit.SpinKitView
         android:id="@+id/spinner_loader"
@@ -119,17 +216,15 @@
         app:layout_constraintBottom_toBottomOf="@+id/img_curved_bg"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/edit_verify_code" />
+        app:layout_constraintTop_toBottomOf="@+id/edit_phone_number" />
 
     <TextView
         android:id="@+id/txt_message"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="@dimen/_10sdp"
-        android:paddingStart="@dimen/_10sdp"
-        android:paddingEnd="@dimen/_10sdp"
-        android:text="Loading"
-        android:visibility="visible"
+        tools:text="Loading"
+        android:visibility="gone"
         android:textSize="@dimen/_10ssp"
         android:textColor="@android:color/white"
         app:layout_constraintEnd_toEndOf="@+id/spinner_loader"
@@ -158,16 +253,16 @@
         app:layout_constraintTop_toBottomOf="@+id/img_curved_bg" />
 
     <Button
-        android:id="@+id/btn_verify"
+        android:id="@+id/btn_register"
         android:layout_width="wrap_content"
         android:layout_height="@dimen/_40sdp"
         android:layout_marginTop="@dimen/_10sdp"
         android:paddingStart="@dimen/_40sdp"
         android:paddingEnd="@dimen/_40sdp"
         android:background="@drawable/bg_common_btn"
-        android:text="@string/text_btn_verify"
+        android:text="Register"
         android:textColor="@android:color/white"
-        android:onClick="onClickVerifyLogin"
+        android:onClick="onClickRegister"
         app:layout_constraintEnd_toEndOf="@+id/view_white_block"
         app:layout_constraintStart_toStartOf="@+id/view_white_block"
         app:layout_constraintTop_toTopOf="@+id/img_curved_bg" />
@@ -191,7 +286,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
-        app:layout_constraintGuide_percent="0.65" />
+        app:layout_constraintGuide_percent="0.73" />
 
     <androidx.constraintlayout.widget.Guideline
         android:id="@+id/guideline_horizontal_center"
