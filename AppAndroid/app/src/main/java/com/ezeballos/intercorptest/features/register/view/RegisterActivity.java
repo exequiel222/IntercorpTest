@@ -31,7 +31,7 @@ public class RegisterActivity extends BaseActivityLiveData<ActivityRegisterBindi
     }
 
     public void onClickRegister(View view) {
-        String name = vBinding.editPhoneNumber.getText().toString();
+        String name = vBinding.editUsername.getText().toString();
         String surname = vBinding.editSurname.getText().toString();
         String birthday = vBinding.editAge.getText().toString();
         if (!name.isEmpty() && !surname.isEmpty() && !birthday.isEmpty()){
